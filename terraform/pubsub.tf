@@ -243,6 +243,10 @@ resource "google_pubsub_subscription" "default" {
     dead_letter_topic     = google_pubsub_topic.dead_letter.id
     max_delivery_attempts = 5
   }
+
+  depends_on = [
+    google_bigquery_table_iam_member.event_pubsub_agent_editor,
+  ]
 }
 
 resource "google_pubsub_subscription" "json" {
@@ -265,6 +269,10 @@ resource "google_pubsub_subscription" "json" {
     dead_letter_topic     = google_pubsub_topic.dead_letter.id
     max_delivery_attempts = 5
   }
+
+  depends_on = [
+    google_bigquery_table_iam_member.raw_event_pubsub_agent_editor,
+  ]
 }
 
 resource "google_pubsub_subscription_iam_member" "editor" {
